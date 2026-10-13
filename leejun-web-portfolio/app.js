@@ -1,0 +1,36 @@
+const projects = [
+{id:'millie',number:'01',filter:'planning',category:'AD RE-PLANNING',name:'밀리의서재 광고 역기획',status:'완료',type:'팀프로젝트 · 팀장',cover:'millie-cover.jpg',summary:'기존 광고를 읽고, 메시지와 표현 방식을 다시 생각하다.',intro:'밀리의서재 「사람은 안 변해 그래서 독서가 변했지_페어링 15s편」을 분석하고 새로운 영상 기획안을 제안한 학생 팀프로젝트입니다.',role:['팀장: 팀원의 역할, 의견, 내용 조율','표지: 팀명·팀원 소개, 분석 영상 제목, 브랜드와 대표 이미지 정리','선정 영상 소개: 기본 정보와 링크, 주요 장면, 장르·분위기·예상 타깃 정리'],result:'팀 공동 결과물에는 기획 의도와 타깃, 콘텐츠의 핵심 메시지, 영상 흐름과 편집·연출 분석, 새로운 기획안이 담겨 있습니다.',images:['millie-4.jpg','millie-14.jpg','millie-22.jpg'],pdf:'millie.pdf',notion:'https://app.notion.com/p/3f871efed52a81029edad964a769f445',note:'역할 표시는 제출한 개인 역할 메모를 기준으로 정리했습니다. 분석과 제안 전체는 팀 공동 결과물입니다.'},
+{id:'forest',number:'02',filter:'planning',category:'CONTENT STRATEGY & PROPOSAL',name:'산림청 온라인 홍보 제안',status:'완료',type:'팀프로젝트',cover:'forest-cover.jpg',summary:'자연을 담다, 자연을 닮다. 일상에서 만나는 산림청.',intro:'동물·여행·현장 이야기와 산림 정책을 연결해, 일상 속에서 자연스럽게 만나는 산림청을 제안한 학생 팀프로젝트입니다.',role:['브랜딩 카피라이팅: “자연을 담다, 자연을 닮다.”','핵심 콘텐츠 기획 및 연간 실행 로드맵 수립','UIUX 슬로건 기획 및 아이디어 제출','제안 배경과 현황 파악','유사 채널 비교 분석','기획서 내 디자인 일부 제작'],result:'숏폼에서 관심을 발견하고 롱폼에서 경험을 확장하는 콘텐츠 구조, 유튜브 채널 구성, 연간 운영 일정과 성과 관리 방향을 제안했습니다.',images:['forest-10.jpg','forest-11.jpg','forest-16.jpg'],pdf:'forest.pdf',notion:'https://app.notion.com/p/3f871efed52a81eb929cc654d5335f8b',note:'산림청을 주제로 한 비공식 학생 제안 프로젝트입니다. 제안서의 KPI는 목표치이며 실제 수주·협업·달성 실적이 아닙니다.'},
+{id:'ryan',number:'03',filter:'illustration',category:'ILLUSTRATION · PERSONAL STUDY',name:'라이언 3D 얼굴 만들기',status:'완료',type:'개인 작업',cover:'ryan.jpg',summary:'빛과 그림자, 둥근 형태로 만드는 캐릭터의 입체감.',intro:'라이언의 얼굴을 입체적으로 표현한 개인 일러스트레이션 학습 작업입니다. 익숙한 캐릭터의 형태를 빛과 그림자로 탐색했습니다.',role:['캐릭터 얼굴의 형태와 명암 표현 제작'],result:'얼굴과 귀의 둥근 볼륨, 눈썹과 눈, 코와 입의 형태를 조합한 일러스트레이션을 완성했습니다.',images:[],file:'ryan.jpg',notion:'https://app.notion.com/p/3f871efed52a81269053ebfbb7e90ad7',note:'원 캐릭터를 바탕으로 한 비공식 학습 작업입니다. 사용 도구와 제작 과정은 추후 기록할 예정입니다.'},
+{id:'dior',number:'04',filter:'web',category:'PRODUCT DETAIL PAGE',name:'Dior Gem Dior 상세페이지',status:'제작 중',type:'개인 작업 · WIP',cover:'dior-cover.jpg',summary:'제품의 형태와 분위기를 긴 호흡의 화면으로.',intro:'Dior Gem Dior 시계를 주제로 만들고 있는 상세페이지 디자인입니다. 차콜 배경과 제품 이미지로 주얼리 워치의 분위기를 화면에 담고 있습니다.',role:['시계 상세페이지 디자인 제작'],result:'업로드한 PSD의 현재 합성 화면을 미리보기로 정리했습니다. 아래에서 현재 상세페이지 전체를 확인할 수 있습니다.',images:['dior-full.jpg'],file:'dior-full.jpg',notion:'https://app.notion.com/p/3f871efed52a81b982ded5f4e590e8f4',note:'비공식 학생 디자인 작업이며 현재 제작 중입니다. 완성 후 최종 화면과 제작 과정을 추가할 예정입니다.'}
+];
+const grid = document.querySelector('#projects');
+const dialog = document.querySelector('#detail');
+const content = document.querySelector('#detail-content');
+let lastFocus;
+const asset = file => `assets/${file}`;
+function render(filter='all'){
+ grid.innerHTML = projects.filter(p=>filter==='all'||p.filter===filter).map(p=>`<button class="project" data-project="${p.id}" aria-label="${p.name} 상세 보기"><div class="project-art ${p.id}"><img src="${asset(p.cover)}" alt="${p.name} 실제 결과물 미리보기" loading="lazy"><span class="project-num">PROJECT / ${p.number}</span><span class="project-open" aria-hidden="true">↗</span></div><div class="project-meta"><span>${p.category}</span><span class="badge ${p.status==='제작 중'?'wip':''}">${p.status} · ${p.type}</span></div><h3>${p.name}</h3><p>${p.summary}</p></button>`).join('');
+}
+render();
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
+ document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',b===button?'true':'false')});render(button.dataset.filter);
+}));
+function showDialog(){lastFocus=document.activeElement;dialog.showModal();document.body.classList.add('modal-open');dialog.scrollTop=0;dialog.querySelector('.close-dialog').focus()}
+function openProject(id){
+ const p=projects.find(p=>p.id===id);if(!p)return;
+ content.innerHTML=`<div class="eyebrow">PROJECT ${p.number} / ${p.category}</div><h2 id="detail-title">${p.name}</h2><div class="detail-meta"><span>${p.status}</span><span>${p.type}</span></div><p class="detail-deck">${p.intro}</p><img class="detail-hero" src="${asset(p.cover)}" alt="${p.name} 대표 화면"><section class="detail-section"><h3>내가 맡은 역할</h3><ul>${p.role.map(r=>`<li>${r}</li>`).join('')}</ul></section><section class="detail-section"><h3>${p.status==='제작 중'?'현재 작업 화면':'결과물과 주요 내용'}</h3><p>${p.result}</p><div class="detail-links">${p.pdf?`<a class="pill dark" href="${asset(p.pdf)}" target="_blank" rel="noopener">전체 제안서 PDF 보기 <span>↗</span></a>`:''}${p.file?`<a class="pill dark" href="${asset(p.file)}" target="_blank" rel="noopener">${p.id==='dior'?'현재 시안':'결과 이미지'} 크게 보기 <span>↗</span></a>`:''}</div><div class="detail-gallery">${p.images.map((im,i)=>`<img ${p.id==='dior'?'class="detail-long"':''} src="${asset(im)}" loading="lazy" alt="${p.name} ${p.id==='dior'?'제작 중인 상세페이지 전체 화면':'주요 페이지 '+(i+1)}">`).join('')}</div></section><p class="detail-footnote">${p.note}</p>`;
+ showDialog();
+}
+grid.addEventListener('click',e=>{const b=e.target.closest('[data-project]');if(b)openProject(b.dataset.project)});
+const videos=[{file:'dog-sleep.mp4',title:'잠깐, 낮잠 시간',label:'낮잠'},{file:'dog-walk.mp4',title:'작은 산책의 기록',label:'산책'},{file:'dog-look.mp4',title:'호기심 가득한 눈',label:'호기심'}];
+function dogGallery(index=0){content.innerHTML=`<div class="eyebrow">MY CREATIVE COMPANION / LITTLE MOMENTS</div><h2 id="detail-title">${videos[index].title}</h2><p class="detail-deck">이준의 검정 강아지, 화면 밖에서 함께하는 작은 순간들.</p><video class="dog-video" controls playsinline preload="metadata" poster="assets/dog-small.jpg" src="${asset(videos[index].file)}"></video><div class="dog-choices" role="group" aria-label="강아지 영상 선택">${videos.map((v,i)=>`<button data-video="${i}" class="${i===index?'active':''}" aria-pressed="${i===index}">${v.label}</button>`).join('')}</div>`;if(!dialog.open)showDialog();else dialog.scrollTop=0}
+document.querySelector('#dog-gallery').addEventListener('click',()=>dogGallery());
+document.querySelector('#dog-widget').addEventListener('click',()=>dogGallery());
+content.addEventListener('click',e=>{const b=e.target.closest('[data-video]');if(b)dogGallery(Number(b.dataset.video))});
+dialog.querySelector('.close-dialog').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}});
+dialog.addEventListener('close',()=>{content.querySelectorAll('video').forEach(v=>v.pause());document.body.classList.remove('modal-open');lastFocus?.focus()});
+const motionButton=document.querySelector('#motion');
+function setMotion(off){document.body.classList.toggle('paused',off);motionButton.textContent=off?'움직임 OFF':'움직임 ON';motionButton.setAttribute('aria-pressed',String(off));motionButton.setAttribute('aria-label',off?'배경 움직임 켜기':'배경 움직임 끄기');try{localStorage.setItem('jun-reduce-motion',String(off))}catch{}}
+let off=matchMedia('(prefers-reduced-motion: reduce)').matches;try{const stored=localStorage.getItem('jun-reduce-motion');if(stored!==null)off=stored==='true'}catch{}setMotion(off);motionButton.addEventListener('click',()=>setMotion(!document.body.classList.contains('paused')));
